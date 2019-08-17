@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+
+    <div class="buy-div">
+        <h3> Welcome to C$50 Finance!</h3>
+        <p>Please choose one of the following options:</p>
+
+        <table class="table-main">
+            <thead>
+                <th></th>
+                <th></th>
+                <th></th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><a href="/buy"><button class="btn btn-primary">Buy Stock</button></a></td>
+                    <td><a href="/sell"><button class="btn btn-primary">Sell Stock</button></a></td>
+                    <td><a href="/history"><button class="btn btn-primary">See History</button></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="outer buy-div">
+        <div class="inner">
+            <h3 class="buy-left">Your Overall Value</h3>
+        </div>
+        <div class="inner">
+            <h3 class="buy-right">Your Current Cash Balance</h3>
+        </div>
+        <div class="inner">
+            <h5 class="buy-left"> {{ wallet | usd }} </h5>
+        </div>
+
+        <div class="inner">
+            <h5 class="buy-right">{{ funds | usd }}</h5>
+        </div>
+    </div>
+
+
+        {% if history %}
+        <div class="table">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        {% for key, value in history[0].items() %}
+                            <th scope="col">{{key}}</th>
+                        {% endfor %}
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {%for item in history%}
+                    <tr>
+                        {%for key, value in item.items()%}
+                        <td>{{value}}</td>
+                        {%endfor%}
+                    </tr>
+                    {%endfor%}
+                </tbody>
+
+
+            </table>
+        </div>
+        {% endif %}
+
+
+
+{% endblock %}
